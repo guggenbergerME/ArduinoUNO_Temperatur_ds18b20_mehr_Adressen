@@ -20,7 +20,7 @@
  * THE SOFTWARE.
  * 
  * Temperatur Messung Trafostation
- * DHT11 Ermittlung Luftfeuchtigkeit
+
  */
 
 #include <Ethernet.h>
@@ -29,24 +29,6 @@
 //#include <Wire.h>
 #include <OneWire.h>
 #include <DallasTemperature.h>
-#include <DHT.h> // DHT11 - Luftfeuchtigkeit
-#include <DHT_U.h> // DHT11 - Luftfeuchtigkeit
-
-//************************************************************************** Variablen
-char stgFromFloat[10];
-char msgToPublish[60];
-char textTOtopic[60];
-
-//************************************************************************** DHT11 Sensor
-#define DHTPIN 4
-#define DHTTYPE    DHT11
-
-DHT_Unified dht(DHTPIN, DHTTYPE);
-
-uint32_t delayMS;
-// mqtt
-const char* topic_dht_temp     = "Temperatur/Trafo_GIMA_01_DHT/temp";
-const char* topic_dht_humidity = "Temperatur/Trafo_GIMA_01_DHT/humidity";
 
 
 //************************************************************************** LAN Network definieren 
@@ -59,6 +41,11 @@ IPAddress mqtt_server(10, 110, 0, 3);  // IP-Adresse des MQTT Brokers im lokalen
 
 EthernetClient ethClient;
 PubSubClient client(ethClient);
+
+//************************************************************************** Variablen
+char stgFromFloat[10];
+char msgToPublish[60];
+char textTOtopic[60];
 
 //************************************************************************** WIRE Bus
 #define ONE_WIRE_BUS 2
@@ -97,7 +84,6 @@ void reconnect                  ();
 void callback(char* topic, byte* payload, unsigned int length);
 void mqtt_reconnect_intervall   ();
 void temp_messen                ();
-void luftfeuchtigkeit_messen    ();
 void(* resetFunc) (void) = 0;
 
 
@@ -106,11 +92,9 @@ void(* resetFunc) (void) = 0;
 unsigned long previousMillis_mqtt_reconnect = 0; // 
 unsigned long interval_mqtt_reconnect = 500; 
 
+
 unsigned long previousMillis_temp_messen = 0; // Temperatur messen aufrufen
 unsigned long interval_temp_messen = 5000; 
-
-unsigned long previousMillis_luftfeuchtigkeit_messen = 0; // Temperatur messen aufrufen
-unsigned long interval_luftfeuchtigkeit_messen = 5000; 
 
 //************************************************************************** SETUP
 void setup() {
@@ -125,9 +109,6 @@ void setup() {
   client.setServer(mqtt_server, 1883);
   client.setCallback(callback);
 
-///////////////////////////////////////////////////////////////////////////  DHT Sensor initialisieren
-dht.begin();
-sensor_t sensor;
 
 }
 
@@ -165,39 +146,6 @@ void callback(char* topic, byte* payload, unsigned int length) {
 }
 
 
-//************************************************************************** Luftfeuchtigkeit auslesen
-void luftfeuchtigkeit_messen() {
- delay(delayMS);
-  // Get temperature event and print its value.
-  sensors_event_t event;
-  dht.temperature().getEvent(&event);
-  if (isnan(event.temperature)) {
-    Serial.println(F("Fehler Temp.Messund DHT11"));
-  }
-  else {
-      // Messdaten per mqtt senden
-      dtostrf(event.temperature, 4, 2, stgFromFloat);
-      sprintf(msgToPublish, "%s", stgFromFloat);
-      sprintf(textTOtopic, "%s", topic_dht_temp);
-      client.publish(textTOtopic, msgToPublish);
-      Serial.println(event.relative_humidity); 
-  }
-
-
-  // Get humidity event and print its value.
-  dht.humidity().getEvent(&event);
-  if (isnan(event.temperature)) {
-    Serial.println(F("Fehler Luftfeuchtigkeit .Messund DHT11"));
-  }
-  else {  
-      // Messdaten per mqtt senden
-      dtostrf(event.relative_humidity, 4, 2, stgFromFloat);
-      sprintf(msgToPublish, "%s", stgFromFloat);
-      sprintf(textTOtopic, "%s", topic_dht_humidity);
-      client.publish(textTOtopic, msgToPublish);
-      Serial.println(event.relative_humidity);  
-  }
-}
 
 //************************************************************************** Temperatur auslesen
 void temp_messen() {
@@ -275,13 +223,6 @@ void loop() {
       temp_messen();
     }
 
-  //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ luftfeuchtigkeit_messen
-  if (millis() - previousMillis_luftfeuchtigkeit_messen > interval_luftfeuchtigkeit_messen) {
-      previousMillis_luftfeuchtigkeit_messen= millis(); 
-      // Prüfen der Panelenspannung
-      //Serial.println("Temperatur messen");
-      luftfeuchtigkeit_messen();
-    }
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ Arduino Reset
 if ( millis()  >= 5000000) resetFunc(); // Reset alle 10 Min

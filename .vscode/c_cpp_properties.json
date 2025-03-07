@@ -10,6 +10,8 @@
             "includePath": [
                 "/home/pc813/github/ArduinoUNO_Temperatur_ds18b20_mehr_Adressen/include",
                 "/home/pc813/github/ArduinoUNO_Temperatur_ds18b20_mehr_Adressen/src",
+                "/home/pc813/github/ArduinoUNO_Temperatur_ds18b20_mehr_Adressen/.pio/libdeps/uno/DHT sensor library",
+                "/home/pc813/github/ArduinoUNO_Temperatur_ds18b20_mehr_Adressen/.pio/libdeps/uno/Adafruit Unified Sensor",
                 "/home/pc813/github/ArduinoUNO_Temperatur_ds18b20_mehr_Adressen/.pio/libdeps/uno/ArduinoJson/src",
                 "/home/pc813/github/ArduinoUNO_Temperatur_ds18b20_mehr_Adressen/.pio/libdeps/uno/Ethernet/src",
                 "/home/pc813/.platformio/packages/framework-arduino-avr/libraries/SPI/src",
@@ -29,6 +31,8 @@
                 "path": [
                     "/home/pc813/github/ArduinoUNO_Temperatur_ds18b20_mehr_Adressen/include",
                     "/home/pc813/github/ArduinoUNO_Temperatur_ds18b20_mehr_Adressen/src",
+                    "/home/pc813/github/ArduinoUNO_Temperatur_ds18b20_mehr_Adressen/.pio/libdeps/uno/DHT sensor library",
+                    "/home/pc813/github/ArduinoUNO_Temperatur_ds18b20_mehr_Adressen/.pio/libdeps/uno/Adafruit Unified Sensor",
                     "/home/pc813/github/ArduinoUNO_Temperatur_ds18b20_mehr_Adressen/.pio/libdeps/uno/ArduinoJson/src",
                     "/home/pc813/github/ArduinoUNO_Temperatur_ds18b20_mehr_Adressen/.pio/libdeps/uno/Ethernet/src",
                     "/home/pc813/.platformio/packages/framework-arduino-avr/libraries/SPI/src",
