@@ -1,0 +1,66 @@
+//
+// !!! WARNING !!! AUTO-GENERATED FILE!
+// PLEASE DO NOT MODIFY IT AND USE "platformio.ini":
+// https://docs.platformio.org/page/projectconf/section_env_build.html#build-flags
+//
+{
+    "configurations": [
+        {
+            "name": "PlatformIO",
+            "includePath": [
+                "/home/pc813/github/ArduinoUNO_Temperatur_DS18B20/include",
+                "/home/pc813/github/ArduinoUNO_Temperatur_DS18B20/src",
+                "/home/pc813/github/ArduinoUNO_Temperatur_DS18B20/.pio/libdeps/uno/ArduinoJson/src",
+                "/home/pc813/github/ArduinoUNO_Temperatur_DS18B20/.pio/libdeps/uno/Ethernet/src",
+                "/home/pc813/.platformio/packages/framework-arduino-avr/libraries/SPI/src",
+                "/home/pc813/.platformio/packages/framework-arduino-avr/libraries/Wire/src",
+                "/home/pc813/github/ArduinoUNO_Temperatur_DS18B20/.pio/libdeps/uno/PubSubClient/src",
+                "/home/pc813/github/ArduinoUNO_Temperatur_DS18B20/.pio/libdeps/uno/DallasTemperature",
+                "/home/pc813/github/ArduinoUNO_Temperatur_DS18B20/.pio/libdeps/uno/OneWire",
+                "/home/pc813/.platformio/packages/framework-arduino-avr/cores/arduino",
+                "/home/pc813/.platformio/packages/framework-arduino-avr/variants/standard",
+                "/home/pc813/.platformio/packages/framework-arduino-avr/libraries/EEPROM/src",
+                "/home/pc813/.platformio/packages/framework-arduino-avr/libraries/HID/src",
+                "/home/pc813/.platformio/packages/framework-arduino-avr/libraries/SoftwareSerial/src",
+                ""
+            ],
+            "browse": {
+                "limitSymbolsToIncludedHeaders": true,
+                "path": [
+                    "/home/pc813/github/ArduinoUNO_Temperatur_DS18B20/include",
+                    "/home/pc813/github/ArduinoUNO_Temperatur_DS18B20/src",
+                    "/home/pc813/github/ArduinoUNO_Temperatur_DS18B20/.pio/libdeps/uno/ArduinoJson/src",
+                    "/home/pc813/github/ArduinoUNO_Temperatur_DS18B20/.pio/libdeps/uno/Ethernet/src",
+                    "/home/pc813/.platformio/packages/framework-arduino-avr/libraries/SPI/src",
+                    "/home/pc813/.platformio/packages/framework-arduino-avr/libraries/Wire/src",
+                    "/home/pc813/github/ArduinoUNO_Temperatur_DS18B20/.pio/libdeps/uno/PubSubClient/src",
+                    "/home/pc813/github/ArduinoUNO_Temperatur_DS18B20/.pio/libdeps/uno/DallasTemperature",
+                    "/home/pc813/github/ArduinoUNO_Temperatur_DS18B20/.pio/libdeps/uno/OneWire",
+                    "/home/pc813/.platformio/packages/framework-arduino-avr/cores/arduino",
+                    "/home/pc813/.platformio/packages/framework-arduino-avr/variants/standard",
+                    "/home/pc813/.platformio/packages/framework-arduino-avr/libraries/EEPROM/src",
+                    "/home/pc813/.platformio/packages/framework-arduino-avr/libraries/HID/src",
+                    "/home/pc813/.platformio/packages/framework-arduino-avr/libraries/SoftwareSerial/src",
+                    ""
+                ]
+            },
+            "defines": [
+                "PLATFORMIO=60117",
+                "ARDUINO_AVR_UNO",
+                "F_CPU=16000000L",
+                "ARDUINO_ARCH_AVR",
+                "ARDUINO=10808",
+                "__AVR_ATmega328P__",
+                ""
+            ],
+            "cStandard": "gnu11",
+            "cppStandard": "gnu++11",
+            "compilerPath": "/home/pc813/.platformio/packages/toolchain-atmelavr/bin/avr-gcc",
+            "compilerArgs": [
+                "-mmcu=atmega328p",
+                ""
+            ]
+        }
+    ],
+    "version": 4
+}
