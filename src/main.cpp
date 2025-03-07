@@ -79,6 +79,11 @@ L     + 5V  (braun)
 N     GND   (blau)
 GrGe  Datenleitung  (grge)
 
+DHT11 Sensor
+************
+Pin Arduino konfigurieren
+#define DHTPIN 4
+
 */
 DeviceAddress temp_sensor_1    = { 0x28, 0xFF, 0x64, 0x1F, 0x7D, 0x80, 0xDF, 0x22 }; 
 const char* topic_sensor_1     = "Temperatur/Trafo_GIMA_01/sensor1";
@@ -107,10 +112,10 @@ unsigned long previousMillis_mqtt_reconnect = 0; //
 unsigned long interval_mqtt_reconnect = 500; 
 
 unsigned long previousMillis_temp_messen = 0; // Temperatur messen aufrufen
-unsigned long interval_temp_messen = 5000; 
+unsigned long interval_temp_messen = 10000; 
 
 unsigned long previousMillis_luftfeuchtigkeit_messen = 0; // Temperatur messen aufrufen
-unsigned long interval_luftfeuchtigkeit_messen = 5000; 
+unsigned long interval_luftfeuchtigkeit_messen = 10000; 
 
 //************************************************************************** SETUP
 void setup() {
