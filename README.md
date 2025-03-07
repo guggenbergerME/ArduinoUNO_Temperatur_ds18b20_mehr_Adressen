@@ -1,1 +1,3 @@
 # ArduinoUNO_Temperatur_ds18b20_mehr_Adressen
+
+Mehrere Adressen auslesen
