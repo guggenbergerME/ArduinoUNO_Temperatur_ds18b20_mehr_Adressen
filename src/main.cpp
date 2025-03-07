@@ -18,6 +18,9 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
+ * 
+ * Testen von PUTZ Temperaturen
+ * 
  */
 
 #include <Ethernet.h>
@@ -28,8 +31,8 @@
 #include <DallasTemperature.h>
 
 //************************************************************************** LAN Network definieren 
-byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0x00, 0x05 };
-IPAddress ip(10, 110, 0, 10); //comment this line if you are using DHCP
+byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0x00, 0x06 };
+IPAddress ip(10, 110, 0, 11); //comment this line if you are using DHCP
 
 //IPAddress subnet(255, 255, 0, 0); // Subnet Mask
 
@@ -63,16 +66,15 @@ N     GND   (blau)
 GrGe  Datenleitung  (grge)
 
 */
-DeviceAddress temp_sensor_1    = { 0x28, 0x61, 0x64, 0x0A, 0xFD, 0x6A, 0xA2, 0xCC }; 
-const char* topic_sensor_1     = "Temperatur/GIMADVFachmarkt/Raumtemp";
+DeviceAddress temp_sensor_1    = { 0x28, 0xFF, 0x64, 0x1F, 0x7F, 0xF9, 0xFD, 0xF6 }; 
+const char* topic_sensor_1     = "Temperatur/GIMAtestPUTZ01/sensor1";
 
-DeviceAddress temp_sensor_2    = { 0x28, 0x61, 0x64, 0x0A, 0xFD, 0x37, 0x34, 0xFE }; 
-const char* topic_sensor_2     = "Temperatur/GIMADVFachmarkt/Schranktemp";
+DeviceAddress temp_sensor_2    = { 0x28, 0xFF, 0x64, 0x1F, 0x7C, 0x6A, 0xFD, 0x84 }; 
+const char* topic_sensor_2     = "Temperatur/GIMAtestPUTZ01/sensor2";
 
-/*
-DeviceAddress temp_sensor_3    = { 0x28, 0x61, 0x64, 0x0A, 0xF0, 0x1D, 0xFA, 0x1D }; 
-const char* topic_sensor_3     = "Heizung/Holz/Raumtemp";
-*/
+DeviceAddress temp_sensor_3    = { 0x28, 0xFF, 0x64, 0x1F, 0x7C, 0x67, 0x58, 0x9D }; 
+const char* topic_sensor_3     = "Temperatur/GIMAtestPUTZ01/sensor3";
+
 
 //************************************************************************** Funktionsprototypen
 void loop                       ();
@@ -91,7 +93,7 @@ unsigned long interval_mqtt_reconnect = 500;
 
 
 unsigned long previousMillis_temp_messen = 0; // Temperatur messen aufrufen
-unsigned long interval_temp_messen = 10000; 
+unsigned long interval_temp_messen = 5000; 
 
 //************************************************************************** SETUP
 void setup() {
@@ -113,7 +115,7 @@ void setup() {
 void reconnect() {
   while (!client.connected()) {
     Serial.print("Verbindung zum MQTT-Server aufbauen...");
-    if (client.connect("Temp_GIMA_Fachmarkt", "hitesh", "RO9UZ7wANCXzmy")) {
+    if (client.connect("Temp_GIMAtestPUTZ01", "hitesh", "RO9UZ7wANCXzmy")) {
       Serial.println("verbunden");
       //client.subscribe("Werktor/K7");
     } else {
@@ -139,22 +141,6 @@ void callback(char* topic, byte* payload, unsigned int length) {
   }
   
   Serial.println(message);
-
-/*
-// -------------------------------------------------------- Beispiel Topic Auswertung
-// -------------------------------------------------------- Wird nur im Relaisbetrieb benötigt
-  if (String(topic) == "Werktor/K3") {
-    if (message == "on") {
-        Serial.println("Relais K3 -> AN");
-        pcf8574.digitalWrite(P3, !HIGH);
-    } 
-    else if (message == "off") {
-        Serial.println("Relais K3 -> AUS");
-        pcf8574.digitalWrite(P3, !LOW);
-    } 
-    else { }} else { }
-
-*/
 
 }
 
@@ -192,7 +178,7 @@ sensors.requestTemperatures();
   client.publish(textTOtopic, msgToPublish);
  }
 
-/*
+
  ////////////////////////////////////////////////////////// Sensor 3
   int currentTemp3 = sensors.getTempC(temp_sensor_3);
   dtostrf(currentTemp3, 4, 2, stgFromFloat);
@@ -205,7 +191,7 @@ sensors.requestTemperatures();
   sprintf(textTOtopic, "%s", topic_sensor_3);
   client.publish(textTOtopic, msgToPublish);
  }
-*/
+
 
 }
 
